@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { Fragment } from "react/cjs/react.production.min";
 import { useFetch } from "../../hooks/useFetch";
 
 import "./Recipe.css";
@@ -12,7 +13,18 @@ const Recipe = () => {
     <div className='recipe'>
       {error && <p className='error'>{error}</p>}
       {isPending && <p className='pending'>{isPending}</p>}
-      {recipe && <h2>{recipe.title}</h2>}
+      {recipe && (
+        <Fragment>
+          <h2 className='page-title'>{recipe.title}</h2>
+          <p>Takes {recipe.cookingTime} to cook.</p>
+          <ul>
+            {recipe.ingredients.map((ingredient) => (
+              <li key={ingredient}>{ingredient}</li>
+            ))}
+          </ul>
+          <p className='method'>{recipe.method}</p>
+        </Fragment>
+      )}
     </div>
   );
 };
