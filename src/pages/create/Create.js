@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import "./Create.css";
 
@@ -10,7 +10,7 @@ const Create = () => {
   const [newIngredient, setNewIngredient] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const ingredientInputRef = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { postData, data } = useFetch("http://localhost:3000/recipes", "POST");
 
@@ -38,9 +38,9 @@ const Create = () => {
 
   useEffect(() => {
     if (data) {
-      history.push("/");
+      navigate.push("/");
     }
-  }, [data, history]);
+  }, [data, navigate]);
 
   return (
     <div className='create'>
